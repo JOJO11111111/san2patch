@@ -1,0 +1,52 @@
+{
+    "id": 8,
+    "subject": "coreutils",
+    "bug_id": "gnubug-26545",
+    "source_file": "src/shred.c",
+    "line_numbers": [
+        290
+    ],
+    "failing_test": "exploit",
+    "passing_test": [],
+    "count_neg": 1,
+    "count_pos": 0,
+    "binary_path": "src/shred",
+    "crash_input": "-n4 -s7 abc",
+    "exploit_file_list": [
+        "exploit"
+    ],
+    "crash_stack_trace": [
+        [
+            "fillpattern",
+            "src/shred.c",
+            293
+        ],
+        [
+            "dopass",
+            "src/shred.c",
+            480
+        ],
+        [
+            "do_wipefd",
+            "src/shred.c",
+            967
+        ],
+        [
+            "wipefile",
+            "src/shred.c",
+            1191
+        ],
+        [
+            "main",
+            "src/shred.c",
+            1317
+        ]
+    ],
+    "test_timeout": 5,
+    "language": "c",
+    "config_script": "config.sh",
+    "build_script": "build.sh",
+    "test_script": "test.sh",
+    "build_command": "make -j20 CFLAGS='-Wno-error' CXXFLAGS='-Wno-error' src/shred",
+    "bug_type": "Integer Overflow"
+}

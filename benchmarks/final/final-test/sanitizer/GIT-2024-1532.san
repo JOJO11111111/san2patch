@@ -1,0 +1,31 @@
+==4067201==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61d00000327e at pc 0x556875461cab bp 0x7ffc51beb690 sp 0x7ffc51beb680
+READ of size 2 at 0x61d00000327e thread T0
+    #0 0x556875461caa in matchCurrentInput /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:377
+    #1 0x556875466ff8 in passDoTest /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:782
+    #2 0x55687545ff26 in findForPassRule /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:211
+    #3 0x55687546a1a7 in passSelectRule /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:1029
+    #4 0x55687546a54e in translatePass /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:1059
+    #5 0x55687546c930 in _lou_translate /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:1289
+    #6 0x55687545aef8 in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/brl_checks.c:178
+    #7 0x556875417322 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:787
+    #8 0x556875418985 in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:897
+    #9 0x556875418eaf in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:937
+    #10 0x55687541a3c1 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:1133
+    #11 0x7f77ab1a9c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #12 0x556875411369 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml+0x11369)
+
+0x61d00000327e is located 2 bytes to the left of 2056-byte region [0x61d000003280,0x61d000003a88)
+allocated by thread T0 here:
+    #0 0x7f77ab875b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x556875444a8b in _lou_allocMem /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/compileTranslationTable.c:5273
+    #2 0x55687545f1d6 in allocStringBuffer /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:60
+    #3 0x55687545f44e in getStringBuffer /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:83
+    #4 0x55687546cf2e in _lou_translate /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:1312
+    #5 0x55687545aef8 in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/brl_checks.c:178
+    #6 0x556875417322 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:787
+    #7 0x556875418985 in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:897
+    #8 0x556875418eaf in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:937
+    #9 0x55687541a3c1 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/tools/lou_checkyaml.c:1133
+    #10 0x7f77ab1a9c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /experiment/san2patch-benchmark/liblouis/GIT-2024-1532/src/liblouis/lou_translateString.c:377 in matchCurrentInput

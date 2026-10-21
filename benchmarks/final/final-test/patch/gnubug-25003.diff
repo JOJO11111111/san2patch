@@ -1,0 +1,65 @@
+From 4954f79ad2e38e4198af301bf52c3562af39d482 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <P@draigBrady.com>
+Date: Thu, 24 Nov 2016 00:03:16 +0000
+Subject: [PATCH] split: fix memory corruption during chunk extraction
+
+ASAN reported this error for: split -n2/3 /dev/null
+  ERROR: AddressSanitizer: negative-size-param: (size=-1)
+  #0 0x7f0d4c36951d in __asan_memmove (/lib64/libasan.so.2+0x8d51d)
+  #1 0x404e06 in memmove /usr/include/bits/string3.h:59
+  #2 0x404e06 in bytes_chunk_extract src/split.c:988
+  #3 0x404e06 in main src/split.c:1626
+
+Specifically there would be invalid memory access
+and subsequent processing if the chunk to be extracted
+was beyond the initial amount read from file (which is
+currently capped at 128KiB).  This issue is not in a
+released version, only being introduced in commit v8.25-4-g62e7af0
+
+* src/split.c (bytes_chunk_extract): The initial_read != SIZE_MAX
+should have been combined with && rather than ||, but also this
+condition is always true in this function so remove entirely.
+* tests/split/b-chunk.sh: Add a test case.
+
+Fixes http://bugs.gnu.org/25003
+---
+ src/split.c            | 2 +-
+ tests/split/b-chunk.sh | 7 ++++++-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/src/split.c b/src/split.c
+index f9c99db43..9a0704c26 100644
+--- a/src/split.c
++++ b/src/split.c
+@@ -982,7 +982,7 @@ bytes_chunk_extract (uintmax_t k, uintmax_t n, char *buf, size_t bufsize,
+   start = (k - 1) * (file_size / n);
+   end = (k == n) ? file_size : k * (file_size / n);
+ 
+-  if (initial_read != SIZE_MAX || start < initial_read)
++  if (start < initial_read)
+     {
+       memmove (buf, buf + start, initial_read - start);
+       initial_read -= start;
+diff --git a/tests/split/b-chunk.sh b/tests/split/b-chunk.sh
+index 8475f9679..c6619a2c7 100755
+--- a/tests/split/b-chunk.sh
++++ b/tests/split/b-chunk.sh
+@@ -25,9 +25,14 @@ split -n 10 /dev/null || fail=1
+ test "$(stat -c %s x* | uniq -c | sed 's/^ *//; s/ /x/')" = "10x0" || fail=1
+ rm -f x??
+ 
++# When extracting K of N where N > file size
++# no data is extracted, and no files are written
++split -n 2/3 /dev/null || fail=1
++returns_ 1 stat x?? 2>/dev/null || fail=1
++
+ # Ensure --elide-empty-files is honored
+ split -e -n 10 /dev/null || fail=1
+-stat x?? 2>/dev/null && fail=1
++returns_ 1 stat x?? 2>/dev/null || fail=1
+ 
+ printf '1\n2\n3\n4\n5\n' > input || framework_failure_
+ 
+-- 
+2.17.1
+

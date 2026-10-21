@@ -1,0 +1,24 @@
+==4018347==ERROR: AddressSanitizer: FPE on unknown address 0x55ebbcb2c8f4 (pc 0x55ebbcb2c8f4 bp 0x607000000250 sp 0x7ffed4e657e0 T0)
+    #0 0x55ebbcb2c8f3 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4TfraAtom.cpp:153
+    #1 0x55ebbcb2dcc9 in AP4_TfraAtom::Create(unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4TfraAtom.cpp:53
+    #2 0x55ebbca8e3c2 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:443
+    #3 0x55ebbca8b2ca in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #4 0x55ebbcab9c4f in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #5 0x55ebbcab9fad in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #6 0x55ebbcaba435 in AP4_ContainerAtom::Create(unsigned int, unsigned long long, bool, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:88
+    #7 0x55ebbca8ec87 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:816
+    #8 0x55ebbca8b2ca in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #9 0x55ebbcab9c4f in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #10 0x55ebbcab9fad in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #11 0x55ebbcaba435 in AP4_ContainerAtom::Create(unsigned int, unsigned long long, bool, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4ContainerAtom.cpp:88
+    #12 0x55ebbca8ec87 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:816
+    #13 0x55ebbca8b2ca in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #14 0x55ebbca8ba4d in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4AtomFactory.cpp:154
+    #15 0x55ebbca37135 in AP4_File::ParseStream(AP4_ByteStream&, AP4_AtomFactory&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4File.cpp:104
+    #16 0x55ebbca3772a in AP4_File::AP4_File(AP4_ByteStream&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4File.cpp:78
+    #17 0x55ebbca2e1f5 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Apps/Mp42Hevc/Mp42Hevc.cpp:374
+    #18 0x7f3e7d032c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #19 0x55ebbca305c9 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/build/mp42hevc+0x305c9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: FPE /experiment/san2patch-benchmark/bento4/NOFIX-2024-003/src/Source/C++/Core/Ap4TfraAtom.cpp:153 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&)

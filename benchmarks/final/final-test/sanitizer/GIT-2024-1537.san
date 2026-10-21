@@ -1,0 +1,21 @@
+==4098964==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6030000002cc at pc 0x55bdea65ba24 bp 0x7ffc1691b590 sp 0x7ffc1691b580
+READ of size 4 at 0x6030000002cc thread T0
+    #0 0x55bdea65ba23 in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/brl_checks.c:260
+    #1 0x55bdea617322 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:787
+    #2 0x55bdea6183db in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:887
+    #3 0x55bdea618eaf in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:937
+    #4 0x55bdea61a476 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:1138
+    #5 0x7fc4568e7c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #6 0x55bdea611369 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml+0x11369)
+
+0x6030000002cc is located 0 bytes to the right of 28-byte region [0x6030000002b0,0x6030000002cc)
+allocated by thread T0 here:
+    #0 0x7fc456fb3b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55bdea614938 in read_inPos /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:505
+    #2 0x55bdea616885 in read_options /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:717
+    #3 0x55bdea617dff in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:861
+    #4 0x55bdea618eaf in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:937
+    #5 0x55bdea61a476 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/lou_checkyaml.c:1138
+    #6 0x7fc4568e7c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /experiment/san2patch-benchmark/liblouis/GIT-2024-1537/src/tools/brl_checks.c:260 in check_base

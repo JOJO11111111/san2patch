@@ -1,0 +1,33 @@
+From bdb29aa84286f331f41e28c47728b31534fa0819 Mon Sep 17 00:00:00 2001
+From: Camsyn <2742046922@qq.com>
+Date: Thu, 4 Jul 2024 08:02:08 +0000
+Subject: [PATCH] [fix](lou_checkyaml): fix issue #1535     store and restore
+ the `errorCount` in `_lou_extParseChars`,     adhering the advice in PR
+ reivew
+
+---
+ liblouis/compileTranslationTable.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/liblouis/compileTranslationTable.c b/liblouis/compileTranslationTable.c
+index 1b7b5431..b3b91b04 100644
+--- a/liblouis/compileTranslationTable.c
++++ b/liblouis/compileTranslationTable.c
+@@ -1406,12 +1406,14 @@ _lou_extParseChars(const char *inString, widechar *outString) {
+ 	   For this function, the functional nature should be maintained,
+ 	   i.e. the same input -> the same behavior.
+ 	   Therefore, `errorCount` should not be externally influenced. */
++	int oldErrorCount = errorCount;
+ 	errorCount = 0;
+ 	parseChars(NULL, &result, &wideIn);
+ 	if (errorCount) {
+ 		errorCount = 0;
+ 		return 0;
+ 	}
++	errorCount = oldErrorCount;
+ 	for (k = 0; k < result.length; k++) outString[k] = result.chars[k];
+ 	return result.length;
+ }
+-- 
+2.17.1
+

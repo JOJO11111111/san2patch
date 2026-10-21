@@ -1,0 +1,39 @@
+{
+    "id": 6,
+    "subject": "coreutils",
+    "bug_id": "gnubug-25003",
+    "source_file": "src/split.c",
+    "line_numbers": [
+        985
+    ],
+    "failing_test": [
+        "exploit"
+    ],
+    "passing_test": [],
+    "count_neg": 1,
+    "count_pos": 0,
+    "binary_path": "src/split",
+    "crash_input": "-n7/75 7",
+    "exploit_file_list": [
+        "tests/exploit"
+    ],
+    "crash_stack_trace": [
+        [
+            "bytes_chunk_extract",
+            "src/split.c",
+            987
+        ],
+        [
+            "main",
+            "src/split.c",
+            1625
+        ]
+    ],
+    "test_timeout": 5,
+    "language": "c",
+    "config_script": "config.sh",
+    "build_script": "build.sh",
+    "test_script": "test.sh",
+    "build_command": "make -j20 CFLAGS='-Wno-error' CXXFLAGS='-Wno-error' src/split",
+    "bug_type": "Integer Overflow"
+}

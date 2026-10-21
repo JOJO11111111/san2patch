@@ -1,0 +1,13 @@
+==4073552==ERROR: AddressSanitizer: SEGV on unknown address 0x6210400d83c0 (pc 0x562071688f08 bp 0x6210400d83c0 sp 0x7ffe10035a80 T0)
+==4073552==The signal is caused by a WRITE memory access.
+    #0 0x562071688f07 in _lou_backTranslate /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/liblouis/lou_backTranslateString.c:270
+    #1 0x56207165390d in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/brl_checks.c:174
+    #2 0x562071613637 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/lou_checkyaml.c:787
+    #3 0x562071615615 in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/lou_checkyaml.c:900
+    #4 0x562071615615 in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/lou_checkyaml.c:937
+    #5 0x562071611cd8 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/lou_checkyaml.c:1138
+    #6 0x7f8f47353c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x562071612fc9 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/tools/lou_checkyaml+0x12fc9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /experiment/san2patch-benchmark/liblouis/GIT-2024-1533/src/liblouis/lou_backTranslateString.c:270 in _lou_backTranslate

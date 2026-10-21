@@ -1,0 +1,22 @@
+==4086258==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000001130 at pc 0x55cb246239a4 bp 0x7ffe60908de0 sp 0x7ffe60908dd0
+WRITE of size 2 at 0x602000001130 thread T0
+    #0 0x55cb246239a3 in _lou_extParseChars /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/liblouis/compileTranslationTable.c:1408
+    #1 0x55cb2465aa85 in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/brl_checks.c:149
+    #2 0x55cb24617250 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:783
+    #3 0x55cb24618309 in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:883
+    #4 0x55cb24618ddd in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:933
+    #5 0x55cb2461a2ef in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:1129
+    #6 0x7fd9addafc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x55cb24611329 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml+0x11329)
+
+0x602000001131 is located 0 bytes to the right of 1-byte region [0x602000001130,0x602000001131)
+allocated by thread T0 here:
+    #0 0x7fd9ae47bb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55cb2465a8b8 in check_base /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/brl_checks.c:136
+    #2 0x55cb24617250 in check_translation /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:783
+    #3 0x55cb24618309 in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:883
+    #4 0x55cb24618ddd in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:933
+    #5 0x55cb2461a2ef in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/tools/lou_checkyaml.c:1129
+    #6 0x7fd9addafc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /experiment/san2patch-benchmark/liblouis/GIT-2024-1535/src/liblouis/compileTranslationTable.c:1408 in _lou_extParseChars

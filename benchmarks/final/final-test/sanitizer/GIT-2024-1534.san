@@ -1,0 +1,18 @@
+==4079905==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fff36a601e8 at pc 0x55be87440adb bp 0x7fff36a5f150 sp 0x7fff36a5f140
+WRITE of size 2 at 0x7fff36a601e8 thread T0
+    #0 0x55be87440ada in compileString /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/liblouis/compileTranslationTable.c:4571
+    #1 0x55be87445405 in _lou_compileTranslationRule /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/liblouis/compileTranslationTable.c:5405
+    #2 0x55be87411f79 in compile_inline_table /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/tools/lou_checkyaml.c:187
+    #3 0x55be87412da2 in read_table /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/tools/lou_checkyaml.c:303
+    #4 0x55be87419f15 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/tools/lou_checkyaml.c:1101
+    #5 0x7f8efb64ec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #6 0x55be87411369 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/tools/lou_checkyaml+0x11369)
+
+Address 0x7fff36a601e8 is located in stack of thread T0 at offset 4184 in frame
+    #0 0x55be87440830 in compileString /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/liblouis/compileTranslationTable.c:4560
+
+  This frame has 1 object(s):
+    [32, 4184) 'file' <== Memory access at offset 4184 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism or swapcontext
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /experiment/san2patch-benchmark/liblouis/GIT-2024-1534/src/liblouis/compileTranslationTable.c:4571 in compileString

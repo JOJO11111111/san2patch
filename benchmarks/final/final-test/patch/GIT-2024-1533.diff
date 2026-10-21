@@ -1,0 +1,44 @@
+From 1d2768e8847b094559064ca9ebfe30811e384b8d Mon Sep 17 00:00:00 2001
+From: Camsyn <2742046922@qq.com>
+Date: Fri, 21 Jun 2024 06:37:55 +0000
+Subject: [PATCH] [fix](lou_checkyaml): fix issue #1533     In function
+ `_lou_backTranslate`, a bad translation lead     to an uninitialized value of
+ `realInlen`. The usage of     an uninitialized value is an undefined
+ behavior, and thus     cause an SEGV in O3 optimization.
+
+    fix: add a guard checking `goodTrans` before accessing
+    `realInlen`, skiping if translation is bad.
+---
+ liblouis/lou_backTranslateString.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/liblouis/lou_backTranslateString.c b/liblouis/lou_backTranslateString.c
+index 9314d69e..cd05d5f7 100644
+--- a/liblouis/lou_backTranslateString.c
++++ b/liblouis/lou_backTranslateString.c
+@@ -266,6 +266,12 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
+ 					appliedRules, &appliedRulesCount, maxAppliedRules);
+ 			break;
+ 		}
++		
++		currentPass--;
++		// If not goodTrans, we need to break out of the loop directly, 
++		// as realInlen might be an uninitialized value in this case.
++		if (!goodTrans) break;
++
+ 		passPosMapping[realInlen] = output.length;
+ 		if (passPosMapping == posMapping) {
+ 			passPosMapping = posMapping2;
+@@ -299,8 +305,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
+ 				}
+ 			}
+ 		}
+-		currentPass--;
+-		if (currentPass >= lastPass && goodTrans) {
++		if (currentPass >= lastPass) {
+ 			releaseStringBuffer(input.bufferIndex);
+ 			input = (InString){ .chars = output.chars,
+ 				.length = output.length,
+-- 
+2.17.1
+

@@ -1,0 +1,54 @@
+{
+    "id": 7,
+    "subject": "coreutils",
+    "bug_id": "gnubug-25023",
+    "source_file": "src/pr.c",
+    "line_numbers": [
+        1236
+    ],
+    "failing_test": [
+        "1.txt"
+    ],
+    "passing_test": [],
+    "count_neg": 1,
+    "count_pos": 0,
+    "binary_path": "src/pr",
+    "crash_input": "\"-S$(printf \"\\t\\t\\t\")\" a -m a",
+    "exploit_file_list": [
+        "tests/1.txt"
+    ],
+    "crash_stack_trace": [
+        [
+            "print_sep_string",
+            "src/pr.c",
+            2241
+        ],
+        [
+            "read_line",
+            "src/pr.c",
+            2493
+        ],
+        [
+            "print_page",
+            "src/pr.c",
+            1802
+        ],
+        [
+            "print_files",
+            "src/pr.c",
+            1618
+        ],
+        [
+            "main",
+            "src/pr.c",
+            1136
+        ]
+    ],
+    "test_timeout": 5,
+    "language": "c",
+    "config_script": "config.sh",
+    "build_script": "build.sh",
+    "test_script": "test.sh",
+    "build_command": "make -j20 CFLAGS='-Wno-error' CXXFLAGS='-Wno-error' src/pr",
+    "bug_type": "Buffer Overflow"
+}

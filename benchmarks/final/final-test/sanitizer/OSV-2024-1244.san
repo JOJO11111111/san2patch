@@ -1,0 +1,18 @@
+==4107389==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61f000000cf1 at pc 0x7fdd26c19950 bp 0x7ffe11a48320 sp 0x7ffe11a47ac8
+READ of size 6 at 0x61f000000cf1 thread T0
+    #0 0x7fdd26c1994f  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x5794f)
+    #1 0x55ff79592edd in extract_fmtp core/parser/sdp/sdp_helpr_funcs.c:217
+    #2 0x55ff79562c95 in parse_sdp_session core/parser/sdp/sdp.c:625
+    #3 0x55ff7956a8f8 in parse_mixed_content core/parser/sdp/sdp.c:819
+    #4 0x55ff7956eb3a in parse_sdp core/parser/sdp/sdp.c:903
+    #5 0x55ff79165a6e in main misc/fuzz/main_parse_msg.c:69
+    #6 0x7fdd26036c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x55ff79147259 in _start (/experiment/san2patch-benchmark/kamailio/OSV-2024-1244/src/main_parse_msg+0x147259)
+
+0x61f000000cf1 is located 0 bytes to the right of 3185-byte region [0x61f000000080,0x61f000000cf1)
+allocated by thread T0 here:
+    #0 0x7fdd26ca0b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55ff791657f0 in main misc/fuzz/main_parse_msg.c:36
+    #2 0x7fdd26036c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x5794f) 

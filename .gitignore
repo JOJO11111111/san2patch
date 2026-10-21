@@ -173,5 +173,5 @@ docker_list.txt
 .ruff_cache
 logs
 .vscode
-benchmarks
+# benchmarks
 debug

@@ -1,0 +1,29 @@
+From bcd508d9dfb2c3e01cf65da316f195163f4c093c Mon Sep 17 00:00:00 2001
+From: Camsyn <2742046922@qq.com>
+Date: Fri, 21 Jun 2024 08:47:42 +0000
+Subject: [PATCH] [fix](lou_checkyaml): fix issue #1539    The original code
+ did check `*searchPos`, but I don't    think the check was rigorous enough.
+
+   I think `pos < length` is a reasonable assumption, so
+   check           `*searchPos >= input->length`
+   rather than  `*searchPos > input->length`.
+---
+ liblouis/lou_translateString.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/liblouis/lou_translateString.c b/liblouis/lou_translateString.c
+index 050ad82d..7c6a1398 100644
+--- a/liblouis/lou_translateString.c
++++ b/liblouis/lou_translateString.c
+@@ -607,7 +607,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
+ 		*searchPos = pos;
+ 		while (*searchIC < transRule->dotslen) {
+ 			int itsTrue = 1;  // whether we have a match or not
+-			if (*searchPos > input->length) return 0;
++			if (*searchPos >= input->length) return 0;
+ 			switch (passInstructions[*searchIC]) {
+ 			case pass_lookback:
+ 				*searchPos -= passInstructions[*searchIC + 1];
+-- 
+2.17.1
+

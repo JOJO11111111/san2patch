@@ -1,0 +1,17 @@
+==4106871==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61a000000533 at pc 0x7f44f0806950 bp 0x7fff20879300 sp 0x7fff20878aa8
+READ of size 4 at 0x61a000000533 thread T0
+    #0 0x7f44f080694f  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x5794f)
+    #1 0x564868d9606d in extract_rtpmap core/parser/sdp/sdp_helpr_funcs.c:154
+    #2 0x564868d684ec in parse_sdp_session core/parser/sdp/sdp.c:610
+    #3 0x564868d725de in parse_sdp core/parser/sdp/sdp.c:875
+    #4 0x564868968d03 in main misc/fuzz/main_parse_msg.c:69
+    #5 0x7f44efc23c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #6 0x56486894a4b9 in _start (/experiment/san2patch-benchmark/kamailio/OSV-2024-1230/src/main_parse_msg+0x14a4b9)
+
+0x61a000000533 is located 0 bytes to the right of 1203-byte region [0x61a000000080,0x61a000000533)
+allocated by thread T0 here:
+    #0 0x7f44f088db40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x564868968a85 in main misc/fuzz/main_parse_msg.c:36
+    #2 0x7f44efc23c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x5794f) 

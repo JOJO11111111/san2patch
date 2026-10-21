@@ -1,0 +1,11 @@
+==3912909==ERROR: AddressSanitizer: FPE on unknown address 0x5559844bfd62 (pc 0x5559844bfd62 bp 0x7ffe4c753a50 sp 0x7ffe4c7539e0 T0)
+    #0 0x5559844bfd61 in OJPEGDecodeRaw /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/libtiff/tif_ojpeg.c:816
+    #1 0x5559844bfc9c in OJPEGDecode /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/libtiff/tif_ojpeg.c:791
+    #2 0x555984464142 in TIFFReadScanline /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/libtiff/tif_read.c:304
+    #3 0x555984423045 in quant /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/tools/tiffmedian.c:771
+    #4 0x55598441eb30 in main /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/tools/tiffmedian.c:283
+    #5 0x7f1bb2ef1c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #6 0x55598441d469 in _start (/experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/tools/tiffmedian+0x1d469)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: FPE /experiment/san2patch-benchmark/libtiff/bugzilla-2611/src/libtiff/tif_ojpeg.c:816 in OJPEGDecodeRaw

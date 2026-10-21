@@ -1,0 +1,20 @@
+==3917196==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000001b4 at pc 0x563cae22cf75 bp 0x7ffe01633980 sp 0x7ffe01633970
+READ of size 1 at 0x6020000001b4 thread T0
+    #0 0x563cae22cf74 in PSDataColorContig /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:2470
+    #1 0x563cae22c969 in PSpage /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:2347
+    #2 0x563cae228d51 in TIFF2PS /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:1606
+    #3 0x563cae2231b7 in main /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:473
+    #4 0x7f1a3831ec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #5 0x563cae222569 in _start (/experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps+0x22569)
+
+0x6020000001b4 is located 0 bytes to the right of 4-byte region [0x6020000001b0,0x6020000001b4)
+allocated by thread T0 here:
+    #0 0x7f1a38fefb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x563cae289328 in _TIFFmalloc /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/libtiff/tif_unix.c:316
+    #2 0x563cae22ce6d in PSDataColorContig /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:2443
+    #3 0x563cae22c969 in PSpage /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:2347
+    #4 0x563cae228d51 in TIFF2PS /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:1606
+    #5 0x563cae2231b7 in main /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:473
+    #6 0x7f1a3831ec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /experiment/san2patch-benchmark/libtiff/bugzilla-2633/src/tools/tiff2ps.c:2470 in PSDataColorContig

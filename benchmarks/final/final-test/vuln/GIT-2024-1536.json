@@ -1,0 +1,34 @@
+{
+    "id": 64,
+    "subject": "liblouis",
+    "bug_id": "GIT-2024-1536",
+    "source_file": "TODO_FILE",
+    "line_numbers": [
+        0
+    ],
+    "failing_test": [
+        "1"
+    ],
+    "passing_test": [],
+    "count_neg": 1,
+    "count_pos": 0,
+    "binary_path": "tools/lou_checkyaml",
+    "crash_input": "$POC",
+    "exploit_file_list": [
+        "tests/1"
+    ],
+    "crash_stack_trace": [
+        [
+            "TODO_FUNCTION",
+            "TODO_FILE",
+            0
+        ]
+    ],
+    "test_timeout": 5,
+    "language": "c",
+    "config_script": "config.sh",
+    "build_script": "build.sh",
+    "test_script": "test.sh",
+    "build_command": "TODO",
+    "bug_type": "TODO"
+}

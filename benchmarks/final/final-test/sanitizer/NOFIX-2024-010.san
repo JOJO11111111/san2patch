@@ -1,0 +1,26 @@
+==4027897==ERROR: AddressSanitizer: SEGV on unknown address 0x60210000002f (pc 0x7f681f728a65 bp 0x000000000d68 sp 0x7ffd441ab248 T0)
+==4027897==The signal is caused by a READ memory access.
+    #0 0x7f681f728a64  (/lib/x86_64-linux-gnu/libc.so.6+0x18ea64)
+    #1 0x7f681f62847b in _IO_default_xsputn (/lib/x86_64-linux-gnu/libc.so.6+0x8e47b)
+    #2 0x7f681f6259d2 in _IO_file_xsputn (/lib/x86_64-linux-gnu/libc.so.6+0x8b9d2)
+    #3 0x7f681f619926 in _IO_fwrite (/lib/x86_64-linux-gnu/libc.so.6+0x7f926)
+    #4 0x556d3871e509 in AP4_StdcFileByteStream::WritePartial(void const*, unsigned int, unsigned int&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/System/StdC/Ap4StdCFileByteStream.cpp:367
+    #5 0x556d3863dc9c in AP4_ByteStream::Write(void const*, unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4ByteStream.cpp:77
+    #6 0x556d38738b71 in AP4_Atom::Write(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:229
+    #7 0x556d38738b71 in AP4_AtomListWriter::Action(AP4_Atom*) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:757
+    #8 0x556d38660b4e in AP4_List<AP4_Atom>::Apply(AP4_List<AP4_Atom>::Item::Operator const&) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4List.h:353
+    #9 0x556d38660b4e in AP4_ContainerAtom::WriteFields(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4ContainerAtom.cpp:234
+    #10 0x556d38738b71 in AP4_Atom::Write(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:229
+    #11 0x556d38738b71 in AP4_AtomListWriter::Action(AP4_Atom*) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:757
+    #12 0x556d38660b4e in AP4_List<AP4_Atom>::Apply(AP4_List<AP4_Atom>::Item::Operator const&) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4List.h:353
+    #13 0x556d38660b4e in AP4_ContainerAtom::WriteFields(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4ContainerAtom.cpp:234
+    #14 0x556d38738b71 in AP4_Atom::Write(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:229
+    #15 0x556d38738b71 in AP4_AtomListWriter::Action(AP4_Atom*) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Atom.cpp:757
+    #16 0x556d386b3e9a in AP4_List<AP4_Atom>::Apply(AP4_List<AP4_Atom>::Item::Operator const&) const /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4List.h:353
+    #17 0x556d386b3e9a in AP4_Processor::Process(AP4_ByteStream&, AP4_ByteStream&, AP4_ByteStream*, AP4_Processor::ProgressListener*, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Core/Ap4Processor.cpp:659
+    #18 0x556d3862ee44 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/Source/C++/Apps/Mp4Decrypt/Mp4Decrypt.cpp:258
+    #19 0x7f681f5bbc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #20 0x556d386309f9 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-010/src/build/mp4decrypt+0x309f9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libc.so.6+0x18ea64) 

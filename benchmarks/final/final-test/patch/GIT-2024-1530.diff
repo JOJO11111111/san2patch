@@ -1,0 +1,34 @@
+From 781b0323d20083f3c7835f99efe2c1a60a01ecb4 Mon Sep 17 00:00:00 2001
+From: Camsyn <2742046922@qq.com>
+Date: Thu, 20 Jun 2024 12:37:21 +0000
+Subject: [PATCH] [fix](lou_checkyaml): fix issue #1530     This issue is
+ caused by dereference a NULL pointer, fixed by adding guard to check NULL
+ pointer
+
+---
+ liblouis/compileTranslationTable.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/liblouis/compileTranslationTable.c b/liblouis/compileTranslationTable.c
+index edda97b5..e8979bb4 100644
+--- a/liblouis/compileTranslationTable.c
++++ b/liblouis/compileTranslationTable.c
+@@ -625,6 +625,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table, int ru
+ 
+ static CharDotsMapping *
+ getDotsForChar(widechar c, const DisplayTableHeader *table) {
++	if (table == NULL) return NULL;
+ 	CharDotsMapping *cdPtr;
+ 	const TranslationTableOffset bucket = table->charToDots[_lou_charHash(c)];
+ 	TranslationTableOffset offset = bucket;
+@@ -638,6 +639,7 @@ getDotsForChar(widechar c, const DisplayTableHeader *table) {
+ 
+ static CharDotsMapping *
+ getCharForDots(widechar d, const DisplayTableHeader *table) {
++	if (table == NULL) return NULL;
+ 	CharDotsMapping *cdPtr;
+ 	const TranslationTableOffset bucket = table->dotsToChar[_lou_charHash(d)];
+ 	TranslationTableOffset offset = bucket;
+-- 
+2.17.1
+

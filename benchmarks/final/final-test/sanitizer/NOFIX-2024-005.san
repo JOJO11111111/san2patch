@@ -1,0 +1,57 @@
+==4021075==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000013c at pc 0x5621db4639c6 bp 0x7ffc84329d30 sp 0x7ffc84329d20
+READ of size 1 at 0x60200000013c thread T0
+    #0 0x5621db4639c5 in AP4_BitReader::ReadCache() const /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4Utils.cpp:447
+    #1 0x5621db463a6f in AP4_BitReader::ReadBits(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4Utils.cpp:467
+    #2 0x5621db4c5bce in AP4_Dac4Atom::AP4_Dac4Atom(unsigned int, unsigned char const*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4Dac4Atom.cpp:201
+    #3 0x5621db4c77c5 in AP4_Dac4Atom::Create(unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4Dac4Atom.cpp:58
+    #4 0x5621db48ce8d in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:776
+    #5 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #6 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #7 0x5621db455e52 in AP4_AudioSampleEntry::AP4_AudioSampleEntry(unsigned int, unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4SampleEntry.cpp:420
+    #8 0x5621db456078 in AP4_Ac4SampleEntry::AP4_Ac4SampleEntry(unsigned int, unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4SampleEntry.cpp:801
+    #9 0x5621db48b70b in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:342
+    #10 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #11 0x5621db45cd20 in AP4_StsdAtom::AP4_StsdAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4StsdAtom.cpp:102
+    #12 0x5621db45d7ae in AP4_StsdAtom::Create(unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4StsdAtom.cpp:57
+    #13 0x5621db48cce2 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:458
+    #14 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #15 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #16 0x5621db4b8c1d in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #17 0x5621db4b90a5 in AP4_ContainerAtom::Create(unsigned int, unsigned long long, bool, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:88
+    #18 0x5621db48d8f7 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:816
+    #19 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #20 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #21 0x5621db4b8c1d in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #22 0x5621db4b90a5 in AP4_ContainerAtom::Create(unsigned int, unsigned long long, bool, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:88
+    #23 0x5621db48d8f7 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:816
+    #24 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #25 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #26 0x5621db4b8c1d in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #27 0x5621db4b90a5 in AP4_ContainerAtom::Create(unsigned int, unsigned long long, bool, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:88
+    #28 0x5621db48d8f7 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:816
+    #29 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #30 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #31 0x5621db4b8c1d in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #32 0x5621db460baa in AP4_TrakAtom::AP4_TrakAtom(unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4TrakAtom.cpp:165
+    #33 0x5621db48cf6e in AP4_TrakAtom::Create(unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4TrakAtom.h:58
+    #34 0x5621db48cf6e in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:413
+    #35 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #36 0x5621db4b88bf in AP4_ContainerAtom::ReadChildren(AP4_AtomFactory&, AP4_ByteStream&, unsigned long long) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:196
+    #37 0x5621db4b8c1d in AP4_ContainerAtom::AP4_ContainerAtom(unsigned int, unsigned long long, bool, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4ContainerAtom.cpp:140
+    #38 0x5621db43850a in AP4_MoovAtom::AP4_MoovAtom(unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4MoovAtom.cpp:80
+    #39 0x5621db48d668 in AP4_MoovAtom::Create(unsigned int, AP4_ByteStream&, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4MoovAtom.h:56
+    #40 0x5621db48d668 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:393
+    #41 0x5621db489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #42 0x5621db48a6bd in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4AtomFactory.cpp:154
+    #43 0x5621db435da5 in AP4_File::ParseStream(AP4_ByteStream&, AP4_AtomFactory&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4File.cpp:104
+    #44 0x5621db43639a in AP4_File::AP4_File(AP4_ByteStream&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4File.cpp:78
+    #45 0x5621db42e276 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Apps/Mp42Aac/Mp42Aac.cpp:250
+    #46 0x7f1657e4cc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #47 0x5621db430a19 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/build/mp42aac+0x30a19)
+
+0x60200000013c is located 0 bytes to the right of 12-byte region [0x602000000130,0x60200000013c)
+allocated by thread T0 here:
+    #0 0x7f1658c3b608 in operator new[](unsigned long) (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xe0608)
+    #1 0x5621db435240 in AP4_DataBuffer::ReallocateBuffer(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4DataBuffer.cpp:210
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /experiment/san2patch-benchmark/bento4/NOFIX-2024-005/src/Source/C++/Core/Ap4Utils.cpp:447 in AP4_BitReader::ReadCache() const

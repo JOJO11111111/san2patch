@@ -1,0 +1,57 @@
+From f4570a9ed6a4a3d9698093d5c9388c59d454d1dd Mon Sep 17 00:00:00 2001
+From: Bogdan Drozdowski <bogdandr@op.pl>
+Date: Mon, 17 Apr 2017 19:04:01 -0700
+Subject: [PATCH] shred: fix invalid pattern generation for certain sizes
+
+* src/shred.c (fillpattern): Fix the "off by one" issue when
+testing whether we have enough space to copy the already
+written portion of the buffer to the remainder of the buffer.
+Specifically for buffer sizes that are (3*(2^x))+1, i.e. 7,13,...
+we both use an uninitialized byte and invoke undefined
+behavior in memcpy() operation on overlapping memory regions.
+* tests/misc/shred-passes.sh: Add an invocation that will
+trigger either valgrind UMR, or ASAN like:
+  ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges
+  #1 0x403065 in fillpattern src/shred.c:293
+A direct test is awkward due to the random writes surrounding
+the problematic pattern writes.
+Fixes http://bugs.gnu.org/26545
+---
+ src/shred.c                | 2 +-
+ tests/misc/shred-passes.sh | 8 ++++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/src/shred.c b/src/shred.c
+index a317c4439..7926e7aa4 100644
+--- a/src/shred.c
++++ b/src/shred.c
+@@ -287,7 +287,7 @@ fillpattern (int type, unsigned char *r, size_t size)
+   r[0] = (bits >> 4) & 255;
+   r[1] = (bits >> 8) & 255;
+   r[2] = bits & 255;
+-  for (i = 3; i < size / 2; i *= 2)
++  for (i = 3; i <= size / 2; i *= 2)
+     memcpy (r + i, r, i);
+   if (i < size)
+     memcpy (r + i, r, size - i);
+diff --git a/tests/misc/shred-passes.sh b/tests/misc/shred-passes.sh
+index e8fcb4f69..199011515 100755
+--- a/tests/misc/shred-passes.sh
++++ b/tests/misc/shred-passes.sh
+@@ -79,5 +79,13 @@ shred: f: removed" > exp || framework_failure_
+ shred -v -u -n20 -s4096 --random-source=Us f 2>out || fail=1
+ compare exp out || fail=1
+ 
++# Trigger an issue in shred before v8.27 where single
++# bytes in the pattern space were not initialized correctly
++# for particular sizes, like 7,13,...
++# This failed under both valgrind and ASAN.
++for size in 1 2 6 7 8; do
++  touch shred.pattern.umr.size
++  shred -n4 -s$size shred.pattern.umr.size || fail=1
++done
+ 
+ Exit $fail
+-- 
+2.17.1
+

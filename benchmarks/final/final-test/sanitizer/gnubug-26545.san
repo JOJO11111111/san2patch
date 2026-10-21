@@ -1,0 +1,63 @@
+==4126591==ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [0x631000015003,0x631000015007) and [0x631000015000, 0x631000015004) overlap
+    #0 0x7f6985437425  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79425)
+    #1 0x5571d9c0787b in fillpattern src/shred.c:293
+    #2 0x5571d9c082f6 in dopass src/shred.c:480
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x5571d9c06ab9 in _start (/experiment/san2patch-benchmark/coreutils/gnubug-26545/src/src/shred+0x6ab9)
+
+0x631000015003 is located 2051 bytes inside of 69633-byte region [0x631000014800,0x631000025801)
+allocated by thread T0 here:
+    #0 0x7f698549cb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5571d9c1628d in xmalloc lib/xmalloc.c:41
+    #2 0x5571d9c08129 in dopass src/shred.c:451
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+0x631000015000 is located 2048 bytes inside of 69633-byte region [0x631000014800,0x631000025801)
+allocated by thread T0 here:
+    #0 0x7f698549cb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5571d9c1628d in xmalloc lib/xmalloc.c:41
+    #2 0x5571d9c08129 in dopass src/shred.c:451
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: memcpy-param-overlap (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79425) 
+=================================================================
+==4126591==ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [0x631000029003,0x631000029007) and [0x631000029000, 0x631000029004) overlap
+    #0 0x7f6985437425  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79425)
+    #1 0x5571d9c0787b in fillpattern src/shred.c:293
+    #2 0x5571d9c082f6 in dopass src/shred.c:480
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x5571d9c06ab9 in _start (/experiment/san2patch-benchmark/coreutils/gnubug-26545/src/src/shred+0x6ab9)
+
+0x631000029003 is located 2051 bytes inside of 69633-byte region [0x631000028800,0x631000039801)
+allocated by thread T0 here:
+    #0 0x7f698549cb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5571d9c1628d in xmalloc lib/xmalloc.c:41
+    #2 0x5571d9c08129 in dopass src/shred.c:451
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+0x631000029000 is located 2048 bytes inside of 69633-byte region [0x631000028800,0x631000039801)
+allocated by thread T0 here:
+    #0 0x7f698549cb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5571d9c1628d in xmalloc lib/xmalloc.c:41
+    #2 0x5571d9c08129 in dopass src/shred.c:451
+    #3 0x5571d9c09d31 in do_wipefd src/shred.c:967
+    #4 0x5571d9c0ac02 in wipefile src/shred.c:1191
+    #5 0x5571d9c0b767 in main src/shred.c:1317
+    #6 0x7f6984feec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: memcpy-param-overlap (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79425) 

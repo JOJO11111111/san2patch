@@ -1,0 +1,17 @@
+==4023803==ERROR: AddressSanitizer: FPE on unknown address 0x55f68c903f54 (pc 0x55f68c903f54 bp 0x607000000480 sp 0x7fffcb92f930 T0)
+    #0 0x55f68c903f53 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4TfraAtom.cpp:153
+    #1 0x55f68c905329 in AP4_TfraAtom::Create(unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4TfraAtom.cpp:53
+    #2 0x55f68c882902 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4AtomFactory.cpp:443
+    #3 0x55f68c87f80a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #4 0x55f68c87ff8d in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4AtomFactory.cpp:154
+    #5 0x55f68c877eb6 in AP4_Atom::Clone() /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4Atom.cpp:324
+    #6 0x55f68c84e09d in AP4_SampleDescription::AP4_SampleDescription(AP4_SampleDescription::Type, unsigned int, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4SampleDescription.cpp:138
+    #7 0x55f68c84e8d1 in AP4_AvcSampleDescription::AP4_AvcSampleDescription(unsigned int, unsigned short, unsigned short, unsigned short, char const*, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4SampleDescription.cpp:385
+    #8 0x55f68c85690b in AP4_AvcSampleEntry::ToSampleDescription() /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4SampleEntry.cpp:1152
+    #9 0x55f68c8f6bef in AP4_StsdAtom::GetSampleDescription(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4StsdAtom.cpp:182
+    #10 0x55f68c82fd32 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Apps/Mp42Ts/Mp42Ts.cpp:602
+    #11 0x7f6c1c45dc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #12 0x55f68c8338b9 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/build/mp42ts+0x338b9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: FPE /experiment/san2patch-benchmark/bento4/NOFIX-2024-007/src/Source/C++/Core/Ap4TfraAtom.cpp:153 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&)

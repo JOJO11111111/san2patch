@@ -1,0 +1,76 @@
+==4022439==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x619000000e9c at pc 0x7f116c41b77a bp 0x7ffc0fc79bb0 sp 0x7ffc0fc79358
+WRITE of size 4294967294 at 0x619000000e9c thread T0
+    #0 0x7f116c41b779  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79779)
+    #1 0x55c8cc0325ee in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
+    #2 0x55c8cc0325ee in AP4_MemoryByteStream::WritePartial(void const*, unsigned int, unsigned int&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4ByteStream.cpp:785
+    #3 0x55c8cc032f4c in AP4_ByteStream::Write(void const*, unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4ByteStream.cpp:77
+    #4 0x55c8cc0ab4c7 in AP4_CencSampleEncryption::DoWriteFields(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4CommonEncryption.cpp:3569
+    #5 0x55c8cc083040 in AP4_Atom::Write(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4Atom.cpp:229
+    #6 0x55c8cc083040 in AP4_Atom::Clone() /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4Atom.cpp:316
+    #7 0x55c8cc0494fd in AP4_SampleDescription::AP4_SampleDescription(AP4_SampleDescription::Type, unsigned int, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleDescription.cpp:138
+    #8 0x55c8cc049d31 in AP4_AvcSampleDescription::AP4_AvcSampleDescription(unsigned int, unsigned short, unsigned short, unsigned short, char const*, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleDescription.cpp:385
+    #9 0x55c8cc051ceb in AP4_AvcSampleEntry::ToSampleDescription() /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleEntry.cpp:1152
+    #10 0x55c8cc05c24f in AP4_StsdAtom::GetSampleDescription(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4StsdAtom.cpp:182
+    #11 0x55c8cc02e240 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Apps/Mp42Avc/Mp42Avc.cpp:326
+    #12 0x7f116b693c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #13 0x55c8cc0305c9 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/build/mp42avc+0x305c9)
+
+0x619000000e9c is located 0 bytes to the right of 1052-byte region [0x619000000a80,0x619000000e9c)
+allocated by thread T0 here:
+    #0 0x7f116c482608 in operator new[](unsigned long) (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xe0608)
+    #1 0x55c8cc035d00 in AP4_DataBuffer::ReallocateBuffer(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4DataBuffer.cpp:210
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x79779) 
+Shadow bytes around the buggy address:
+  0x0c327fff8180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c327fff8190: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c327fff81a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c327fff81b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c327fff81c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c327fff81d0: 00 00 00[04]fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c327fff81e0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c327fff81f0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c327fff8200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c327fff8210: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c327fff8220: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+ASAN:DEADLYSIGNAL
+=================================================================
+==4022439==ERROR: AddressSanitizer: SEGV on unknown address 0x619000010000 (pc 0x7f116b72d441 bp 0x7ffc0fc79bb0 sp 0x7ffc0fc79318 T0)
+==4022439==The signal is caused by a WRITE memory access.
+    #0 0x7f116b72d440  (/lib/x86_64-linux-gnu/libc.so.6+0xbb440)
+    #1 0x7f116c41b6ce  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x796ce)
+    #2 0x55c8cc0325ee in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
+    #3 0x55c8cc0325ee in AP4_MemoryByteStream::WritePartial(void const*, unsigned int, unsigned int&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4ByteStream.cpp:785
+    #4 0x55c8cc032f4c in AP4_ByteStream::Write(void const*, unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4ByteStream.cpp:77
+    #5 0x55c8cc0ab4c7 in AP4_CencSampleEncryption::DoWriteFields(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4CommonEncryption.cpp:3569
+    #6 0x55c8cc083040 in AP4_Atom::Write(AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4Atom.cpp:229
+    #7 0x55c8cc083040 in AP4_Atom::Clone() /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4Atom.cpp:316
+    #8 0x55c8cc0494fd in AP4_SampleDescription::AP4_SampleDescription(AP4_SampleDescription::Type, unsigned int, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleDescription.cpp:138
+    #9 0x55c8cc049d31 in AP4_AvcSampleDescription::AP4_AvcSampleDescription(unsigned int, unsigned short, unsigned short, unsigned short, char const*, AP4_AtomParent*) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleDescription.cpp:385
+    #10 0x55c8cc051ceb in AP4_AvcSampleEntry::ToSampleDescription() /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4SampleEntry.cpp:1152
+    #11 0x55c8cc05c24f in AP4_StsdAtom::GetSampleDescription(unsigned int) /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Core/Ap4StsdAtom.cpp:182
+    #12 0x55c8cc02e240 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/Source/C++/Apps/Mp42Avc/Mp42Avc.cpp:326
+    #13 0x7f116b693c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #14 0x55c8cc0305c9 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-006/src/build/mp42avc+0x305c9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libc.so.6+0xbb440) 

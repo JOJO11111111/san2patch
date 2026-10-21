@@ -1,0 +1,15 @@
+==4054495==ERROR: AddressSanitizer: SEGV on unknown address 0x0000000014bc (pc 0x000000521a69 bp 0x7fff5e7254e0 sp 0x7fff5e725460 T0)
+==4054495==The signal is caused by a READ memory access.
+    #0 0x521a68  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x521a68)
+    #1 0x52192f  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x52192f)
+    #2 0x580eee  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x580eee)
+    #3 0x5777ff  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x5777ff)
+    #4 0x51c1f9  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x51c1f9)
+    #5 0x519efb  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x519efb)
+    #6 0x5178f9  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x5178f9)
+    #7 0x514070  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x514070)
+    #8 0x7fa6c7099c86  (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #9 0x41a3b9  (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x41a3b9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/experiment/san2patch-benchmark/liblouis/GIT-2024-1530/src/tools/lou_checkyaml+0x521a68) 

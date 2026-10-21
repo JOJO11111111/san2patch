@@ -1,0 +1,19 @@
+==4034252==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x55fa08630323 bp 0x7fffd855aa60 sp 0x7fffd855a9f0 T0)
+==4034252==The signal is caused by a READ memory access.
+==4034252==Hint: address points to the zero page.
+    #0 0x55fa08630322 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4382
+    #1 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #2 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #3 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #4 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #5 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #6 0x55fa086302c8 in finalizeCharacter /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4381
+    #7 0x55fa086311da in finalizeTable /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4482
+    #8 0x55fa0863462b in _lou_getTable /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:5071
+    #9 0x55fa08634831 in lou_getTable /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:5081
+    #10 0x55fa0860c44d in main /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/tools/lou_checktable.c:114
+    #11 0x7f57368b4c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #12 0x55fa0860be39 in _start (/experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/tools/lou_checktable+0xbe39)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /experiment/san2patch-benchmark/liblouis/NOFIX-2024-001/src/liblouis/compileTranslationTable.c:4382 in finalizeCharacter

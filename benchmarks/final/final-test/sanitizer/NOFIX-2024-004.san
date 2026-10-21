@@ -1,0 +1,14 @@
+==4019711==ERROR: AddressSanitizer: FPE on unknown address 0x55abbf52b564 (pc 0x55abbf52b564 bp 0x607000000100 sp 0x7ffd8a293710 T0)
+    #0 0x55abbf52b563 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4TfraAtom.cpp:153
+    #1 0x55abbf52c939 in AP4_TfraAtom::Create(unsigned int, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4TfraAtom.cpp:53
+    #2 0x55abbf48d032 in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned int, unsigned int, unsigned long long, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4AtomFactory.cpp:443
+    #3 0x55abbf489f3a in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, unsigned long long&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4AtomFactory.cpp:234
+    #4 0x55abbf48a6bd in AP4_AtomFactory::CreateAtomFromStream(AP4_ByteStream&, AP4_Atom*&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4AtomFactory.cpp:154
+    #5 0x55abbf435da5 in AP4_File::ParseStream(AP4_ByteStream&, AP4_AtomFactory&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4File.cpp:104
+    #6 0x55abbf43639a in AP4_File::AP4_File(AP4_ByteStream&, bool) /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4File.cpp:78
+    #7 0x55abbf42e276 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Apps/Mp42Aac/Mp42Aac.cpp:250
+    #8 0x7f28fad5cc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #9 0x55abbf430a19 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/build/mp42aac+0x30a19)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: FPE /experiment/san2patch-benchmark/bento4/NOFIX-2024-004/src/Source/C++/Core/Ap4TfraAtom.cpp:153 in AP4_TfraAtom::AP4_TfraAtom(unsigned int, unsigned char, unsigned int, AP4_ByteStream&)

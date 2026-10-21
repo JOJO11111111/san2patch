@@ -1,0 +1,13 @@
+==4060848==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x560012c1616f bp 0x7ffc87dd4c90 sp 0x7ffc87dd4b80 T0)
+==4060848==The signal is caused by a READ memory access.
+==4060848==Hint: address points to the zero page.
+    #0 0x560012c1616e in read_typeforms /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:655
+    #1 0x560012c1673d in read_options /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:710
+    #2 0x560012c17d2d in read_test /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:857
+    #3 0x560012c18ddd in read_tests /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:933
+    #4 0x560012c1a3a4 in main /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:1134
+    #5 0x7fc371e4ec86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #6 0x560012c11329 in _start (/experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml+0x11329)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /experiment/san2patch-benchmark/liblouis/GIT-2024-1531/src/tools/lou_checkyaml.c:655 in read_typeforms

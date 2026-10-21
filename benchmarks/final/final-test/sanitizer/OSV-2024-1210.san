@@ -1,0 +1,15 @@
+==4106353==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x606000000057 at pc 0x5608d516a80b bp 0x7ffd883442a0 sp 0x7ffd88344290
+READ of size 1 at 0x606000000057 thread T0
+    #0 0x5608d516a80a in parse_mixed_content core/parser/sdp/sdp.c:813
+    #1 0x5608d516eb3a in parse_sdp core/parser/sdp/sdp.c:903
+    #2 0x5608d4d65a6e in main misc/fuzz/main_parse_msg.c:69
+    #3 0x7fe3ef199c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #4 0x5608d4d47259 in _start (/experiment/san2patch-benchmark/kamailio/OSV-2024-1210/src/main_parse_msg+0x147259)
+
+0x606000000057 is located 0 bytes to the right of 55-byte region [0x606000000020,0x606000000057)
+allocated by thread T0 here:
+    #0 0x7fe3efe03b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5608d4d657f0 in main misc/fuzz/main_parse_msg.c:36
+    #2 0x7fe3ef199c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow core/parser/sdp/sdp.c:813 in parse_mixed_content

@@ -1,0 +1,14 @@
+==3803888==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000012 at pc 0x56094b801ea2 bp 0x7ffe364ee450 sp 0x7ffe364ee440
+READ of size 1 at 0x602000000012 thread T0
+    #0 0x56094b801ea1 in main src/make-prime-list.c:214
+    #1 0x7f133abe9c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #2 0x56094b8012a9 in _start (/experiment/san2patch-benchmark/coreutils/gnubug-19784/src/src/make-prime-list+0x12a9)
+
+0x602000000012 is located 0 bytes to the right of 2-byte region [0x602000000010,0x602000000012)
+allocated by thread T0 here:
+    #0 0x7f133b097b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x56094b801c09 in xalloc src/make-prime-list.c:163
+    #2 0x56094b801d6b in main src/make-prime-list.c:198
+    #3 0x7f133abe9c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow src/make-prime-list.c:214 in main

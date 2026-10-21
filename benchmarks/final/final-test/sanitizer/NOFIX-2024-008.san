@@ -1,0 +1,11 @@
+==4025169==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000028 (pc 0x563131e8f1e0 bp 0x7ffe34e6d860 sp 0x7ffe34e6d3b0 T0)
+==4025169==The signal is caused by a READ memory access.
+==4025169==Hint: address points to the zero page.
+    #0 0x563131e8f1df in AP4_Processor::ProcessFragments(AP4_MoovAtom*, AP4_List<AP4_AtomLocator>&, AP4_ContainerAtom*, AP4_SidxAtom*, unsigned long long, AP4_ByteStream&, AP4_ByteStream&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-008/src/Source/C++/Core/Ap4Processor.cpp:229
+    #1 0x563131e9417c in AP4_Processor::Process(AP4_ByteStream&, AP4_ByteStream&, AP4_ByteStream*, AP4_Processor::ProgressListener*, AP4_AtomFactory&) /experiment/san2patch-benchmark/bento4/NOFIX-2024-008/src/Source/C++/Core/Ap4Processor.cpp:726
+    #2 0x563131e2e8b9 in main /experiment/san2patch-benchmark/bento4/NOFIX-2024-008/src/Source/C++/Apps/Mp4Edit/Mp4Edit.cpp:451
+    #3 0x7fe5588a0c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #4 0x563131e30579 in _start (/experiment/san2patch-benchmark/bento4/NOFIX-2024-008/src/build/mp4edit+0x30579)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /experiment/san2patch-benchmark/bento4/NOFIX-2024-008/src/Source/C++/Core/Ap4Processor.cpp:229 in AP4_Processor::ProcessFragments(AP4_MoovAtom*, AP4_List<AP4_AtomLocator>&, AP4_ContainerAtom*, AP4_SidxAtom*, unsigned long long, AP4_ByteStream&, AP4_ByteStream&)

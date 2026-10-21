@@ -1,0 +1,28 @@
+From c7fdab2e3a4355f8d24ac4b16f807ac5b8adfe71 Mon Sep 17 00:00:00 2001
+From: Camsyn <2742046922@qq.com>
+Date: Thu, 20 Jun 2024 13:03:09 +0000
+Subject: [PATCH] [fix](lou_checkyaml): fix issue #1531     Terminate the
+ program when parsing emph_classes fails
+
+---
+ tools/lou_checkyaml.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/tools/lou_checkyaml.c b/tools/lou_checkyaml.c
+index a888baf7..14a4f461 100644
+--- a/tools/lou_checkyaml.c
++++ b/tools/lou_checkyaml.c
+@@ -306,6 +306,10 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
+ 				"Table %s not valid", v->name);
+ 	free(emph_classes);
+ 	emph_classes = lou_getEmphClasses(v->name);	 // get declared emphasis classes
++	if (emph_classes == NULL) {
++		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
++				"No declared emphasis classes found in table %s", v->name);
++	}
+ 	table_name = strdup((char *)v->name);
+ 	if (!display_table) {
+ 		if (v->content) {
+-- 
+2.17.1
+

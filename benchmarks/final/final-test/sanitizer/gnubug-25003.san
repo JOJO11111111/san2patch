@@ -1,0 +1,24 @@
+==3822820==ERROR: AddressSanitizer: negative-size-param: (size=-6)
+    #0 0x7fce2f60e1a0 in __interceptor_memmove (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x7b1a0)
+    #1 0x55db4a40afd3 in bytes_chunk_extract src/split.c:987
+    #2 0x55db4a40e29c in main src/split.c:1625
+    #3 0x7fce2f1c3c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #4 0x55db4a407459 in _start (/experiment/san2patch-benchmark/coreutils/gnubug-25003/src/src/split+0x7459)
+
+0x7fce30672006 is located 2054 bytes inside of 135168-byte region [0x7fce30671800,0x7fce30692800)
+allocated by thread T0 here:
+    #0 0x7fce2f671b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55db4a41456f in xmalloc lib/xmalloc.c:41
+    #2 0x55db4a40ddc5 in main src/split.c:1568
+    #3 0x7fce2f1c3c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+
+SUMMARY: AddressSanitizer: negative-size-param (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x7b1a0) in __interceptor_memmove
+==3822820==AddressSanitizer CHECK failed: ../../../../src/libsanitizer/asan/asan_poisoning.cc:188 "((beg)) < ((end))" (0x7fce30672006, 0x7fce30672000)
+    #0 0x7fce2f67cbf2  (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xe9bf2)
+    #1 0x7fce2f69b575 in __sanitizer::CheckFailed(char const*, int, char const*, unsigned long long, unsigned long long) (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x108575)
+    #2 0x7fce2f677344 in __asan_region_is_poisoned (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xe4344)
+    #3 0x7fce2f60dbf1 in __interceptor_memmove (/usr/lib/x86_64-linux-gnu/libasan.so.4+0x7abf1)
+    #4 0x55db4a40afd3 in bytes_chunk_extract src/split.c:987
+    #5 0x55db4a40e29c in main src/split.c:1625
+    #6 0x7fce2f1c3c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x55db4a407459 in _start (/experiment/san2patch-benchmark/coreutils/gnubug-25003/src/src/split+0x7459)

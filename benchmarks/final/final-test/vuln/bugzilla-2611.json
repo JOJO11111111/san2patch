@@ -1,0 +1,54 @@
+{
+    "id": 21,
+    "subject": "libtiff",
+    "bug_id": "bugzilla-2611",
+    "source_file": "libtiff/tif_ojpeg.c",
+    "line_numbers": [
+        789
+    ],
+    "failing_test": [
+        "1.tif"
+    ],
+    "passing_test": [],
+    "count_neg": 1,
+    "count_pos": 0,
+    "binary_path": "tools/tiffmedian",
+    "crash_input": "$POC foo",
+    "exploit_file_list": [
+        "tests/1.tif"
+    ],
+    "crash_stack_trace": [
+        [
+            "OJPEGDecodeRaw",
+            "libtiff/tif_ojpeg.c",
+            816
+        ],
+        [
+            "OJPEGDecode",
+            "libtiff/tif_ojpeg.c",
+            791
+        ],
+        [
+            "TIFFReadScanline",
+            "libtiff/tif_read.c",
+            304
+        ],
+        [
+            "quant",
+            "tools/tiffmedian.c",
+            771
+        ],
+        [
+            "main",
+            "tools/tiffmedian.c",
+            283
+        ]
+    ],
+    "test_timeout": 5,
+    "language": "c",
+    "config_script": "config.sh",
+    "build_script": "build.sh",
+    "test_script": "test.sh",
+    "build_command": "make -j20 CFLAGS='-static' CPPFLAGS='-static' LDFLAGS='-static'",
+    "bug_type": "Divide by Zero"
+}
