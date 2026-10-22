@@ -1,0 +1,17 @@
+diff --git a/Source/C++/Core/Ap4Atom.cpp b/Source/C++/Core/Ap4Atom.cpp
+index 02e0d6a..df9898d 100644
+--- a/Source/C++/Core/Ap4Atom.cpp
++++ b/Source/C++/Core/Ap4Atom.cpp
+@@ -562,7 +562,11 @@ AP4_AtomParent::AddChild(AP4_Atom* child, int position)
+ +---------------------------------------------------------------------*/
+ AP4_Result
+ AP4_AtomParent::RemoveChild(AP4_Atom* child)
+-{
++// FIXME: Crash CWE-476: NULL Pointer Dereference
++ {
++    // check if the pointer is NULL
++    if (child == NULL) return AP4_ERROR_INVALID_PARAMETERS;
++
+     // check that this is our child
+     if (child->GetParent() != this) return AP4_ERROR_INVALID_PARAMETERS;
+ 
